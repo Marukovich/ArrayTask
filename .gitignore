@@ -1,8 +1,14 @@
+#Intelij files and dirs
+.idea
+target
+logs
+
 # Compiled class file
 *.class
 
 # Log file
-*.log
+log.txt
+logs.txt
 
 # BlueJ files
 *.ctxt
