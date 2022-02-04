@@ -2,6 +2,7 @@ package by.marukovich.task0.main;
 
 import by.marukovich.task0.entity.CustomArray;
 import by.marukovich.task0.exception.CustomException;
+import by.marukovich.task0.parser.CustomParser;
 import by.marukovich.task0.parser.impl.CustomParserImpl;
 import by.marukovich.task0.reader.impl.FileReaderImpl;
 import by.marukovich.task0.service.ArrayAction;
@@ -17,7 +18,7 @@ import java.util.List;
 public class SimpleMain {
     private static final Logger log = LogManager.getLogger();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CustomException {
         log.log(Level.INFO, "first log");
         List<String> stringList = new ArrayList<>();
 
@@ -28,7 +29,7 @@ public class SimpleMain {
             log.log(Level.ERROR, "file not found");
         }
         String string = stringList.get(0);
-        CustomParserImpl customParser = new CustomParserImpl();
+        CustomParser customParser = CustomParserImpl.getInstance();
         int[] array = customParser.parseArray(string);
         CustomArray intArray = new CustomArray(array);
         intArray.setIntegerArray(array);

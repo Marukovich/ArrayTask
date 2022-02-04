@@ -31,7 +31,8 @@ public class FileReaderImpl implements CustomReader {
             log.log(Level.ERROR, "File is not found");
             throw new CustomException("File is not found", e);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.log(Level.ERROR, "File can't be read" + filePath, e);
+            throw new CustomException("File can't be read");
         }
         return stringList;
     }
