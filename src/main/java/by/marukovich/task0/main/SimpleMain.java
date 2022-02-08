@@ -1,16 +1,18 @@
 package by.marukovich.task0.main;
 
+import by.marukovich.task0.entity.ArrayStatistics;
 import by.marukovich.task0.entity.CustomArray;
+import by.marukovich.task0.entity.Warehouse;
 import by.marukovich.task0.exception.CustomException;
 import by.marukovich.task0.parser.CustomParser;
 import by.marukovich.task0.parser.impl.CustomParserImpl;
 import by.marukovich.task0.reader.impl.FileReaderImpl;
+import by.marukovich.task0.repository.CustomRepository;
 import by.marukovich.task0.service.ArrayAction;
 import by.marukovich.task0.service.impl.ArrayActionImpl;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,18 @@ public class SimpleMain {
         CustomArray intArray = new CustomArray(array);
         intArray.setIntegerArray(array);
         ArrayAction arrayAction = ArrayActionImpl.getInstance();
+        Warehouse warehouse = Warehouse.getInstance();
+        CustomRepository repository = CustomRepository.getInstance();
         int minElement = arrayAction.findMinElement(intArray);
-        log.log(Level.INFO, minElement);
+        int maxElement = arrayAction.findMaxElement(intArray);
+        double average = arrayAction.findAverageElement(intArray);
+        int sum = arrayAction.calculateSumOfArrayElements(intArray);
+        int negative = arrayAction.findQuantityOfNegativeElement(intArray);
+        int positive = arrayAction.findQuantityOfPositiveElement(intArray);
+        ArrayStatistics arrayStatistics = new ArrayStatistics(minElement, maxElement, average, sum, positive, negative);
+        Integer arrayId = intArray.getArrayId();
+        warehouse.put(arrayId, arrayStatistics);
+        repository.addCustomArray(intArray);
+
     }
 }

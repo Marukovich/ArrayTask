@@ -9,39 +9,46 @@ import java.util.List;
 
 public class CustomRepository {
 
-    private List<CustomArray> listOfArrays;
+    private List<CustomArray> customArrayList = new ArrayList<>();
+    private static final CustomRepository instance = new CustomRepository();
+
+    private CustomRepository(){}
+
+    public static CustomRepository getInstance(){
+        return instance;
+    }
 
     public void addCustomArray(CustomArray customArray) {
-        this.listOfArrays.add(customArray);
+        customArrayList.add(customArray);
     }
 
     public void removeCustomArray(CustomArray customArray) {
-        this.listOfArrays.remove(customArray);
+        customArrayList.remove(customArray);
     }
 
     public boolean addAll(Collection<? extends CustomArray> c) {
-        return listOfArrays.addAll(c);
+        return customArrayList.addAll(c);
     }
 
     public boolean removeAll(Collection<? extends CustomArray> c) {
-        return listOfArrays.removeAll(c);
+        return customArrayList.removeAll(c);
     }
 
     public CustomArray get(int index) {
-        return listOfArrays.get(index);
+        return customArrayList.get(index);
     }
 
     public CustomArray set(int index, CustomArray customArray) {
-        return listOfArrays.set(index, customArray);
+        return customArrayList.set(index, customArray);
     }
 
     public void sort(Comparator<CustomArray> c) {
-        listOfArrays.sort(c);
+        customArrayList.sort(c);
     }
 
     public List<CustomArray> query(Specification specification) {
         List<CustomArray> list = new ArrayList<>();
-        for (CustomArray array : listOfArrays) {
+        for (CustomArray array : customArrayList) {
             if (specification.specify(array)) {
                 list.add(array);
             }
